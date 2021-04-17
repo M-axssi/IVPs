@@ -28,10 +28,20 @@ target_link_libraries(main_2 lapacke blas)
 
 target_include_directories(main_2 PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-project(Test1)
+project(Test_1)
 
-add_executable(Test1  Test1.cpp  ${DIR_SRCS})
+add_executable(Test_1  Test_1.cpp  ${DIR_SRCS})
 
-target_link_libraries(Test1 lapacke blas)
+target_link_libraries(Test_1 lapacke blas)
 
-target_include_directories(Test1 PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(Test_1 PUBLIC ${PROJECT_SOURCE_DIR}/include)
+
+set(CMAKE_BUILD_TYPE "DEBUG")
+
+project(Test_2)
+
+add_executable(Test_2  Test_2.cpp  ${DIR_SRCS})
+
+target_link_libraries(Test_2 lapacke blas)
+
+target_include_directories(Test_2 PUBLIC ${PROJECT_SOURCE_DIR}/include)
