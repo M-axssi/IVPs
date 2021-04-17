@@ -15,7 +15,7 @@ void Implicit_LMM::Nonlinear_Solve(std::vector<Real> &  initial,std::vector<Real
 	  mat[i+j*n]=K*mat[i+j*n];
       for (int i=0;i<n;++i)
 	mat[i+i*n]=1+mat[i+i*n];
-      Real *Y=VV_ADD(-K*F.Get_diff(initial),(-1)*C-initial));
+      Real *Y=VV_ADD(-K*F.Get_diff(initial),(-1)*C-initial);
       int ipiv[n];
       LAPACKE_dgesv(LAPACK_COL_MAJOR, n, 1, mat, n, ipiv, Y, n);
       VP_ADD(initial,Y);

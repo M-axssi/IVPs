@@ -53,34 +53,3 @@ void  VP_ADD(std::vector<Real> &a,const Real * b)
   for (int i=0;i<n;++i)
     a[i]+=b[i];
 }
-
-Real * Change(const std::vector<Real> & a)
-{
-  int n=a.size();
-  Real * temp=new Real [n];
-  for (int i=0;i<n;++i)
-    temp[i]=a[i];
-  return temp;
-}
-
-Real * Change(const std::vector<std::vector<Real>> & a)
-{
-  int n=a.size();
-  Real * temp=new Real [n*n];
-  for (int i=0;i<n;++i)
-    for (int j=0;j<n;++j)
-      {
-	temp[n*j+i]=a[i][j];
-      }
-  return temp;
-}
-
-std::vector<Real> Change(Real * x,int n)
-{
-  std::vector<Real> y(n);
-  for (int i=0;i<n;++i)
-    {
-      y[i]=x[i];
-    }
-  return y;
-}

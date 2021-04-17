@@ -22,11 +22,6 @@ Real * VV_ADD(const std::vector<Real> &a,const std::vector<Real> &b);
 
 void  VP_ADD(std::vector<Real> &a,const Real * b);
 
-Real * Change(const std::vector<Real> & );
-
-Real * Change(const std::vector<std::vector<Real>> & );
-
-std::vector<Real> Change (Real * x,int n);
 
 #else
 //Do nothing!

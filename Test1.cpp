@@ -30,31 +30,28 @@ private:
 
 Real*  Three_Body_Sys::Get_Jacobi(const std::vector<Real>  &u) const
 {
-    Real C_1=u[1]*u[1]+u[2]*u[2]+(u[0]+miu-1)*(u[0]+miu-1);
+   Real C_1=u[1]*u[1]+u[2]*u[2]+(u[0]+miu-1)*(u[0]+miu-1);
   Real C_2=u[1]*u[1]+u[2]*u[2]+(u[0]+miu)*(u[0]+miu);
-  Real* m=new int [36];
-  for (int i=0;i<18;++i) m[i]=0;
-  m[3]=m[10]=m[17]=1;
+  Real* m=new Real [36];
+  for (int i=0;i<36;++i) m[i]=0;
+  m[18]=m[25]=m[32]=1;
   auto f1=[&](Real x,Real y)->Real {return (miu*sqrt(Pow(C_1,3))-3*sqrt(C_1)*x*x*miu)/Pow(C_1,3)+
 				    ((1-miu)*sqrt(Pow(C_2,3))-3*sqrt(C_2)*y*y*(1-miu))/Pow(C_2,3);};
   auto f2=[&](Real x,Real y,Real z)->Real{return (3*sqrt(C_1)*x*y*miu)/Pow(C_1,3)+
 					  (3*sqrt(C_2)*x*z*(1-miu))/Pow(C_2,3);};
-  m[18]=1-f1(u[0]+miu-1,u[0]+miu);
-  m[19]=f2(u[1],u[0]+miu-1,u[0]+miu);
-  m[20]=f2(u[2],u[0]+miu-1,u[0]+miu);
-  m[21]=m[23]=0;
-  m[22]=2;
+  m[3]=1-f1(u[0]+miu-1,u[0]+miu);
+  m[9]=f2(u[1],u[0]+miu-1,u[0]+miu);
+  m[15]=f2(u[2],u[0]+miu-1,u[0]+miu);
+  m[27]=2;
 
-  m[24]=f2(u[1],u[0]+miu-1,u[0]+miu);
-  m[25]=1-f1(u[1],u[1]);
-  m[26]=f2(u[1],u[2],u[2]);
-  m[27]=-2;
-  m[28]=m[29]=0;
+  m[4]=f2(u[1],u[0]+miu-1,u[0]+miu);
+  m[10]=1-f1(u[1],u[1]);
+  m[16]=f2(u[1],u[2],u[2]);
+  m[22]=-2;
 
-  m[30]=f2(u[2],u[0]+miu-1,u[0]+miu);
-  m[31]=f2(u[1],u[2],u[2]);
-  m[32]=-f1(u[2],u[2]);
-  m[33]=m[34]=m[35]=0;
+  m[5]=f2(u[2],u[0]+miu-1,u[0]+miu);
+  m[11]=f2(u[1],u[2],u[2]);
+  m[17]=-f1(u[2],u[2]);
   return m;
 }
   
@@ -102,7 +99,7 @@ int main()
     {
       fout<<"The solution errors,convergence rates,CPU time for Bdfs of "
 	<<i<<" order of accuracy:"<<std::endl;		 
-      int steps=3000000;
+      int steps=300000;
       std::vector<std::vector<Real>> temp;
       
       startTime=clock();
@@ -114,7 +111,7 @@ int main()
       
       for (int j=1;j<=5;++j)
 	{
-	  steps=steps+1000000;
+	  steps=steps+300000;
 	  std::vector<std::vector<Real>> A;
 	  
 	  startTime=clock();
@@ -123,7 +120,7 @@ int main()
 	  
 	  std::vector<Real> S=A.back();
 	  Real E2=Get_max_norm(S,u0);
-	  fout<<"Steps ="<<steps<<":   solution errors = "<<E2<<"  ,  CPU time = "<<" "<<(double)(endTime - startTime) / CLOCKS_PER_SEC<<" s "<<"  ,  convergence rates = "<<log(E1/E2)/log(double(steps)/(steps-1000000))<<std::endl;
+	  fout<<"Steps ="<<steps<<":   solution errors = "<<E2<<"  ,  CPU time = "<<" "<<(double)(endTime - startTime) / CLOCKS_PER_SEC<<" s "<<"  ,  convergence rates = "<<log(E1/E2)/log(double(steps)/(steps-300000))<<std::endl;
 	  E1=E2;
 	}
         fout<<std::endl<<std::endl<<std::endl;
