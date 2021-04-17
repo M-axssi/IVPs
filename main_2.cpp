@@ -5,7 +5,6 @@
 #include <cmath>
 #include <fstream>
 #include <functional>
-#include<ctime>
 
 Real Pow(Real x,int y)
 {
@@ -22,13 +21,14 @@ class Three_Body_Sys:public IVPs
 public:
   Three_Body_Sys(int N,std::vector<Real> & u):IVPs(N,u){};
   std::vector<Real> Get_diff(const std::vector<Real> & u) const;
-  Real*  Get_Jacobi(const std::vector<Real> &u) const;
+  Real * Get_Jacobi(const std::vector<Real> &u) const;
 private:
   const Real miu=1/81.45;
 };
 
 
-Real*  Three_Body_Sys::Get_Jacobi(const std::vector<Real>  &u) const
+
+Real* Three_Body_Sys::Get_Jacobi(const std::vector<Real>  &u) const
 {
   Real C_1=u[1]*u[1]+u[2]*u[2]+(u[0]+miu-1)*(u[0]+miu-1);
   Real C_2=u[1]*u[1]+u[2]*u[2]+(u[0]+miu)*(u[0]+miu);
@@ -70,62 +70,44 @@ std::vector<Real> Three_Body_Sys::Get_diff(const std::vector<Real> & u) const
   return temp;
 }
 
-Real Get_max_norm(std::vector<Real> x,std::vector<Real> y)
-{
-  int n=x.size();
-  Real temp=0;
-  for (int i=0;i<n;++i)
-    {
-      if (fabs(x[i]-y[i])>temp)
-	temp=fabs((x[i]-y[i]));
-    }
-  return temp;
-}
-
 int main()
 {
+  std::ifstream fin("input.txt");
+
   std::string s;
   int p;
   int steps;
-  int turns;
-  int increment;
-
-  std::ifstream fin("Test1_input.txt");
-  fin>>s>>p>>steps>>turns>>increment;
+  Real T;
   
-  std::vector<Real> u0;
-  u0={0.994,0,0,0,-2.0015851063790825224,0};
-  Real T=17.06521656015796;
-  Three_Body_Sys F(6,u0);
+  fin>>s>>p>>steps;
+  
   TimeIntegrator * TI=TimeIntegratorFactory::instance().CreateTimeIntegrator(s);
-  
-  std::ofstream fout("Test1.out");
 
-  clock_t startTime,endTime;
-  fout<<"The solution errors,convergence rates,CPU time for "<<s<<" which of "<<p<<" order of accuracy:"<<std::endl;		 
-  std::vector<std::vector<Real>> temp;
-      
-  startTime=clock();
-  TI->Solve_IVPs(steps,T,F,temp,p);
-  endTime=clock();
-  std::vector<Real> S=temp.back();
-  Real E1=Get_max_norm(S,u0);
-  fout<<"Steps ="<<steps<<":   Solution errors = "<<E1<<"  ,  CPU time = "<<" "<<(double)(endTime - startTime) / CLOCKS_PER_SEC<<" s "<<std::endl;
-      
-  for (int j=1;j<=turns;++j)
-    {
-      steps=steps+increment;
-      std::vector<std::vector<Real>> A;
-	  
-      startTime=clock();
-      TI->Solve_IVPs(steps,T,F,A,p);
-      endTime=clock();
-	  
-      std::vector<Real> S=A.back();
-      Real E2=Get_max_norm(S,u0);
-      fout<<"Steps ="<<steps<<":   Solution errors = "<<E2<<"  ,  CPU time = "<<" "<<(double)(endTime - startTime) / CLOCKS_PER_SEC<<" s "<<"  ,  Convergence rates = "<<log(E1/E2)/log(double(steps)/(steps-increment))<<std::endl;
-      E1=E2;
-    }
+  std::vector<Real> u0;
+  T=19.14045706162071;
+  u0={0.87978,0,0,0,-0.3797,0};
   
+  std::vector<std::vector<Real>> A;
+  Three_Body_Sys F(6,u0);
+  TI->Solve_IVPs(steps,T,F,A,p);
+
+  for (auto x:A.back())
+    std::cout<<x<<"  ";
+    
+  std::ofstream fout("output.m");
+  fout<<"X=[";
+  for (int i=0;i<=steps;++i)
+    {
+      fout<<A[i][0]<<" ";
+    }
+  fout<<"]"<<std::endl;
+  fout<<"Y=[";
+  for (int i=0;i<=steps;++i)
+    {
+      fout<<A[i][1]<<" ";
+    }
+  fout<<"]"<<std::endl;
+  fout<<"plot(X,Y);";
+  fout.close();
 }
  

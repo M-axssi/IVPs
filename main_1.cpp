@@ -76,23 +76,21 @@ int main()
 
   std::string s;
   int p;
-  int question_num;
-  Real T;
   int steps;
-
-  fin>>s>>p>>question_num>>T>>steps;
+  Real T;
   
-  TimeIntegrator * ABF=TimeIntegratorFactory::instance().CreateTimeIntegrator(s);
+  fin>>s>>p>>steps;
+  
+  TimeIntegrator * TI=TimeIntegratorFactory::instance().CreateTimeIntegrator(s);
 
   std::vector<Real> u0;
-  if (question_num==1)
-     u0={0.994,0,0,0,-2.0015851063790825224,0};
-  else
-     u0={0.87978,0,0,0,-0.3797,0};
+  u0={0.994,0,0,0,-2.0015851063790825224,0};
+  T=17.06521656015796;
+  //u0={0.87978,0,0,0,-0.3797,0};
   
   std::vector<std::vector<Real>> A;
   Three_Body_Sys F(6,u0);
-  ABF->Solve_IVPs(steps,T,F,A,p);
+  TI->Solve_IVPs(steps,T,F,A,p);
 
   for (auto x:A.back())
     std::cout<<x<<"  ";

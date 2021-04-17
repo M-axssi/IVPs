@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
-project(IVPs)
+project(main_1)
 
-set(CMAKE_BUILD_TYPE "DEBUG")
+set(CMAKE_BUILD_TYPE "RELEASE")
 set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb ")
 set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall ")
 
@@ -14,11 +14,19 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 
 aux_source_directory(./src DIR_SRCS)
 
-add_executable(IVPs  main.cpp  ${DIR_SRCS})
+add_executable(main_1  main_1.cpp  ${DIR_SRCS})
 
-target_link_libraries(IVPs lapacke blas)
+target_link_libraries(main_1 lapacke blas)
 
-target_include_directories(IVPs PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(main_1 PUBLIC ${PROJECT_SOURCE_DIR}/include)
+
+project(main_2)
+
+add_executable(main_2  main_2.cpp  ${DIR_SRCS})
+
+target_link_libraries(main_2 lapacke blas)
+
+target_include_directories(main_2 PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 project(Test1)
 
