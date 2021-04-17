@@ -21,28 +21,40 @@ class Three_Body_Sys:public IVPs
 public:
   Three_Body_Sys(int N,std::vector<Real> & u):IVPs(N,u){};
   std::vector<Real> Get_diff(const std::vector<Real> & u) const;
-  std::vector<std::vector<Real>> Get_Jacobi(const std::vector<Real> &u) const;
+  Real * Get_Jacobi(const std::vector<Real> &u) const;
 private:
   const Real miu=1/81.45;
 };
 
 
 
-std::vector<std::vector<Real>> Three_Body_Sys::Get_Jacobi(const std::vector<Real>  &u) const
+Real* Three_Body_Sys::Get_Jacobi(const std::vector<Real>  &u) const
 {
   Real C_1=u[1]*u[1]+u[2]*u[2]+(u[0]+miu-1)*(u[0]+miu-1);
   Real C_2=u[1]*u[1]+u[2]*u[2]+(u[0]+miu)*(u[0]+miu);
-  std::vector<std::vector<Real>> m;
-  m.push_back({0,0,0,1,0,0});
-  m.push_back({0,0,0,0,1,0});
-  m.push_back({0,0,0,0,0,1});
+  Real* m=new int [36];
+  for (int i=0;i<18;++i) m[i]=0;
+  m[3]=m[10]=m[17]=1;
   auto f1=[&](Real x,Real y)->Real {return (miu*sqrt(Pow(C_1,3))-3*sqrt(C_1)*x*x*miu)/Pow(C_1,3)+
 				    ((1-miu)*sqrt(Pow(C_2,3))-3*sqrt(C_2)*y*y*(1-miu))/Pow(C_2,3);};
   auto f2=[&](Real x,Real y,Real z)->Real{return (3*sqrt(C_1)*x*y*miu)/Pow(C_1,3)+
 					  (3*sqrt(C_2)*x*z*(1-miu))/Pow(C_2,3);};
-  m.push_back({1-f1(u[0]+miu-1,u[0]+miu),f2(u[1],u[0]+miu-1,u[0]+miu),f2(u[2],u[0]+miu-1,u[0]+miu),0,2,0});
-  m.push_back({f2(u[1],u[0]+miu-1,u[0]+miu),1-f1(u[1],u[1]),f2(u[1],u[2],u[2]),-2,0,0});
-  m.push_back({f2(u[2],u[0]+miu-1,u[0]+miu),f2(u[1],u[2],u[2]),-f1(u[2],u[2]),0,0,0});
+  m[18]=1-f1(u[0]+miu-1,u[0]+miu);
+  m[19]=f2(u[1],u[0]+miu-1,u[0]+miu);
+  m[20]=f2(u[2],u[0]+miu-1,u[0]+miu);
+  m[21]=m[23]=0;
+  m[22]=2;
+
+  m[24]=f2(u[1],u[0]+miu-1,u[0]+miu);
+  m[25]=1-f1(u[1],u[1]);
+  m[26]=f2(u[1],u[2],u[2]);
+  m[27]=-2;
+  m[28]=m[29]=0;
+
+  m[30]=f2(u[2],u[0]+miu-1,u[0]+miu);
+  m[31]=f2(u[1],u[2],u[2]);
+  m[32]=-f1(u[2],u[2]);
+  m[33]=m[34]=m[35]=0;
   return m;
 }
   

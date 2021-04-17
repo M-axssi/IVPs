@@ -38,6 +38,22 @@ std::vector<Real>  operator+(const std::vector<Real> & a,const std::vector<Real>
   return temp;
 }
 
+Real * VV_ADD(const std::vector<Real> &a,const std::vector<Real> &b)
+{
+  int n=a.size();
+  Real * temp=new Real[n];
+  for (int i=0;i<n;++i)
+    temp[i]=a[i]+b[i];
+  return temp;
+}
+
+void  VP_ADD(std::vector<Real> &a,const Real * b)
+{
+  int n=a.size();
+  for (int i=0;i<n;++i)
+    a[i]+=b[i];
+}
+
 Real * Change(const std::vector<Real> & a)
 {
   int n=a.size();
