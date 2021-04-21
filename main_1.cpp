@@ -72,7 +72,7 @@ std::vector<Real> Three_Body_Sys::Get_diff(const std::vector<Real> & u) const
 
 int main()
 {
-  std::ifstream fin("input.txt");
+  std::ifstream fin("main1_input.txt");
 
   std::string s;
   int p;
@@ -92,10 +92,10 @@ int main()
   Three_Body_Sys F(6,u0);
   TI->Solve_IVPs(steps,T,F,A,p);
 
-  for (auto x:A.back())
-    std::cout<<x<<"  ";
+  // for (auto x:A.back())
+  //   std::cout<<x<<"  ";
     
-  std::ofstream fout("output.m");
+  std::ofstream fout("main1_output.m");
   fout<<"X=[";
   for (int i=0;i<=steps;++i)
     {
