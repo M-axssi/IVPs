@@ -22,6 +22,7 @@ Real * VV_ADD(const std::vector<Real> &a,const std::vector<Real> &b);
 
 void  VP_ADD(std::vector<Real> &a,const Real * b);
 
+Real Pow(Real x,int y);
 
 #else
 //Do nothing!

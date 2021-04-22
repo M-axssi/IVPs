@@ -16,6 +16,16 @@ std::vector<Real>  operator*(const Real a,const std::vector<Real> & c)
   return temp;
 }
 
+Real Pow(Real x,int y)
+{
+  Real s=1;
+  for (int i=1;i<=y;++i)
+    {
+      s*=x;
+    }
+  return s;
+}
+
 std::vector<Real>  operator-(const std::vector<Real> & a,const std::vector<Real> & b)
 {
   std::vector<Real> temp;

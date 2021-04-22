@@ -8,7 +8,6 @@ void Runge_Kutta::Solve_IVPs(const int steps,
   const Real k=T/steps;
   for (int i=1;i<=steps;++i)
     {
-      std::vector<Real> temp(S[i-1]);
       std::vector<Real> y_1,y_2,y_3,y_4;
       y_1=F.Get_diff(S[i-1]);
       y_2=F.Get_diff(S[i-1]+(k/2)*y_1);
