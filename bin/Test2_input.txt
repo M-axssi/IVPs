@@ -1,1 +1,18 @@
-Bdfs 3 2000 8
+Bdfs 1 2000 5
+Bdfs 2 2000 5
+Bdfs 3 2000 5
+Bdfs 4 2000 5
+
+Adams_Bashforth 1 2000 5
+Adams_Bashforth 2 2000 5
+Adams_Bashforth 3 2000 5
+Adams_Bashforth 4 2000 5
+
+Adams_Moulton 2 2000 5
+Adams_Moulton 3 2000 5
+Adams_Moulton 4 2000 5
+Adams_Moulton 5 2000 5
+
+Runge_Kutta 4 2000 5
+
+
