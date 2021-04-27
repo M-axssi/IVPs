@@ -31,7 +31,6 @@ void Bdfs::Solve_IVPs(const int steps,
     {
       std::vector<Real>temp(n,0);
       std::vector<Real> initial(S[i-1]);
-      //initial+=k*F.Get_diff(S[i-1]);
       for (int j=i-s;j<=i-1;++j)
 	{
 	  temp+=Alpha[s-1][j-i+s]*S[j];

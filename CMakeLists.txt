@@ -14,7 +14,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 
 aux_source_directory(./src DIR_SRCS)
 
-add_executable(main_1  main_1.cpp  ${DIR_SRCS})
+add_executable(main_1  ./main_test/main_1.cpp  ${DIR_SRCS})
 
 target_link_libraries(main_1 lapacke blas)
 
@@ -22,7 +22,7 @@ target_include_directories(main_1 PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 project(main_2)
 
-add_executable(main_2  main_2.cpp  ${DIR_SRCS})
+add_executable(main_2  ./main_test/main_2.cpp  ${DIR_SRCS})
 
 target_link_libraries(main_2 lapacke blas)
 
@@ -30,18 +30,17 @@ target_include_directories(main_2 PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 project(Test_1)
 
-add_executable(Test_1  Test_1.cpp  ${DIR_SRCS})
+add_executable(Test_1  ./main_test/Test_1.cpp  ${DIR_SRCS})
 
 target_link_libraries(Test_1 lapacke blas)
 
 target_include_directories(Test_1 PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-set(CMAKE_BUILD_TYPE "DEBUG")
-
 project(Test_2)
 
-add_executable(Test_2  Test_2.cpp  ${DIR_SRCS})
+add_executable(Test_2  ./main_test/Test_2.cpp  ${DIR_SRCS})
 
 target_link_libraries(Test_2 lapacke blas)
 
 target_include_directories(Test_2 PUBLIC ${PROJECT_SOURCE_DIR}/include)
+

@@ -38,14 +38,11 @@
 \chead{Project1}
 \rhead{2021/04/23}
 
-\section*{I.项目的编译生成说明}
-\hspace{0.8em}
-整个项目通过Cmake生成,在./build中输入命令行指令"cmake .."可在主目录下的bin文件夹中得到
-主程序和测试程序的可执行文件以及最终的文档文件Project1.pdf。
 
-\section*{II.主程序和测试程序的使用说明}
+
+\section*{I.主程序和测试程序的使用说明}
 \hspace{0.8em}
-主程序由main\_1.cpp和main\_2.cpp构成,分别用于两个初值三体问题的数值解的图像的matlab程序的生成。
+主程序由./main\_test下的main\_1.cpp和main\_2.cpp构成,分别用于两个初值三体问题的数值解的图像的matlab程序的生成。
 
 main\_1.cpp用于第一个初值问题,其输入文件"main1\_input.txt"提供三个值,分别表示所使用的求解方法、
 该方法的精度和总步数，例如"Adams\_Bashforth 4 24000"表示希望使用总步数为24000的4阶Adams Bashforth方法求解
@@ -54,7 +51,7 @@ main\_1.cpp用于第一个初值问题,其输入文件"main1\_input.txt"提供�
 
 main\_2.cpp解决的是第二个初值问题,其输入文件为"main2\_input.txt",输入格式同main\_1.cpp，输出文件为"main2\_output.m"。
 
-测试程序由Test\_1.cpp和Test\_2.cpp构成，它们分别对两个初值问题进行相对应的测试。
+测试程序由./main\_test下的Test\_1.cpp和Test\_2.cpp构成，它们分别对两个初值问题进行相对应的测试。
 
 Test\_1.cpp用于对第一个初值问题的测试，其输入文件"Test1\_input.txt"提供四个值,分别表示所测试的方法、方法的精度、初始步数、
 提升步数的次数。例如"Adams\_Bashforth 4 24000 4",表示测试四阶Adams Bashforth方法在不同步数下的
@@ -64,12 +61,12 @@ Test\_1.cpp用于对第一个初值问题的测试，其输入文件"Test1\_inpu
 Test\_2.cpp用于对第二个初值问题的测试，其输入文件为"Test2\_input.txt",其四个输入参数意义同"Test1\_input.txt"四个参数，
 输出结果显示在"Test2.out"文件下。
 
-\section*{III.代码的UML图}
-\includegraphics[scale=0.36]{../png/uml.png}
+\section*{II.代码的UML图}
+\includegraphics[scale=0.37]{../png/uml.png}
 
 \newpage
-\section*{IV.不同精度不同方法的误差、CPU时间和收敛速度的计算结果}
-\subsection*{IV-a. 第一个初值问题}
+\section*{III.步数递增下，不同精度不同方法的误差、CPU时间和收敛速度的计算结果}
+\subsection*{III-a. 第一个初值问题}
 \hspace{0.8em}
 第一个初值问题因为是以$T_1$为周期的，所以可以将初始值$u(0)$视为$u$在$T_1$的精确解,既$u(T_1)=u(0)$。假设一个$p$阶精度的方法在步长为$h$所得到的
 数值解$U$在$T_1$的取值为$U^{T_1/h}$,则可以定义误差$E(h)=||U^{T_1/h}-u(T_1)||_{\infty}$。此时由之前所学的收敛性理论可知,若$h$足够的小，我们有
@@ -87,9 +84,9 @@ Test\_2.cpp用于对第二个初值问题的测试，其输入文件为"Test2\_i
 \end{align}
 所以根据$(4)$,我们可以通过前后两次的误差计算收敛速度$p'=\log_2(E(h)/E(h/2))$。
 
-具体的计算见./result中的文本文件"Test1\_result.txt"。
+具体的计算结果见./result中的文本文件"Test1\_result.txt"。
 
-\subsection*{IV-b. 第二个初值问题}
+\subsection*{III-b. 第二个初值问题}
 \hspace{0.8em}
 第二个初值问题采用的是Richardson extrapolation计算误差和收敛速度。首先定义网格的误差，设$U,u$分别为近似解和精确解,近似解的步长为$h$,而其中网格点设为$x_1,x_2,...,x_N$,
 其中$U_i\approx u(x_i)$,定义一个点上的误差为$e_i=U_i-u(x_i)$,进一步可以定义整个网格的误差为$E(h)=U(h)-u=h\sum\limits_{i=1}^N|e_i|$,又由$(2)$可知$E(h)\approx hCh^p\frac{T}{h}=C'h^p$。
@@ -112,10 +109,17 @@ Test\_2.cpp用于对第二个初值问题的测试，其输入文件为"Test2\_i
     \end{align}
     所以根据$(10)$,我们可以计算收敛速度$p'=\log_2(\hat{E}(h)/\hat{E}(h/2))$。
 
-具体的计算见./result中的文本文件"Test2\_result.txt"。
+    具体的计算结果见./result中的文本文件"Test2\_result.txt"。
 
-\section*{V.其他计算结果}
-\subsection*{V-a. 不同方法达到其图像结果与精确图像肉眼区分不了所需要的最小步数}
+    \subsection*{III-c. 结果分析}
+    \hspace{0.8em}
+    从两个初值问题所得到的结果可以看出，收敛速度$p'$的确随着我们选择方法的精度$p$的增加而增加，
+    并且大体上有$p'\approx p$。
+
+
+\newpage
+\section*{IV.其他计算结果}
+\subsection*{IV-a. 不同方法达到其图像结果与精确图像肉眼区分不了所需要的最小步数}
 \hspace{0.8em}
 下面结果中使用的是四阶Adams-Bashforth、五阶Adams-Moulton、四阶Bdfs以及传统的四阶Runge-Kutta
 \\[5pt]
@@ -130,8 +134,6 @@ Test\_2.cpp用于对第二个初值问题的测试，其输入文件为"Test2\_i
     \hline
 \end{tabular}
 
-\newpage
-
 \centering
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{|c|c|c|c|c|}
@@ -144,7 +146,7 @@ Test\_2.cpp用于对第二个初值问题的测试，其输入文件为"Test2\_i
 \end{tabular}
 
 \raggedright
-\subsection*{V-b. Euler方法和Runge-Kutta方法在第一个初值问题中的图像结果}
+\subsection*{IV-b. Euler方法和Runge-Kutta方法在第一个初值问题中的图像结果}
 \hspace{0.8em}
 下面两幅图分别是步数为24000的Euler方法和步数为6000的Runge-Kutta方法得到的图像结果：
 
@@ -155,11 +157,10 @@ Test\_2.cpp用于对第二个初值问题的测试，其输入文件为"Test2\_i
 \raggedright
 \hspace{0.8em}
 从图中可以看到，Euler方法得到的图像是不稳定的，而Runge-Kutta方法得到的图像是稳定的，且已经比较接近精确解。具体的
-原因可以从两种方法的稳定区域图可以看出，传统四阶Runge-Kutta方法的稳定区域更大，而Euler方法的稳定区域相对要小，所以导致了
+原因从两种方法的稳定区域图可以看出，传统四阶Runge-Kutta方法的稳定区域更大，而Euler方法的稳定区域相对要小，所以导致了
 Euler方法更容易不稳定。
 
-\newpage
-\subsection*{V-c. 对于第一个初值问题，不同方法达到误差$\mathbf{\leq10^{-3}}$所需要的CPU时间}
+\subsection*{IV-c. 对于第一个初值问题，不同方法达到误差$\mathbf{\leq10^{-3}}$所需要的CPU时间}
 \hspace{0.8em}
 下面结果中使用的是四阶Adams-Bashforth、五阶Adams-Moulton、四阶Bdfs以及传统的四阶Runge-Kutta
 \\[12pt]

@@ -1,0 +1,78 @@
+The solution errors,convergence rates,CPU time for Bdfs which of 1 order of accuracy:
+Steps =64000:   Solution errors = 1.17793  ,  CPU time =  0.988413 s 
+Steps =128000:   Solution errors = 2.07506  ,  CPU time =  0.298829 s   ,  Convergence rates = -0.816898
+Steps =256000:   Solution errors = 2.05942  ,  CPU time =  0.548105 s   ,  Convergence rates = 0.01092
+Steps =512000:   Solution errors = 2.03016  ,  CPU time =  0.900572 s   ,  Convergence rates = 0.0206443
+
+The solution errors,convergence rates,CPU time for Bdfs which of 2 order of accuracy:
+Steps =64000:   Solution errors = 1.70437  ,  CPU time =  0.204892 s 
+Steps =128000:   Solution errors = 1.42511  ,  CPU time =  0.322751 s   ,  Convergence rates = 0.258167
+Steps =256000:   Solution errors = 0.832182  ,  CPU time =  0.542212 s   ,  Convergence rates = 0.776101
+Steps =512000:   Solution errors = 0.416284  ,  CPU time =  0.990748 s   ,  Convergence rates = 0.999332
+
+The solution errors,convergence rates,CPU time for Bdfs which of 3 order of accuracy:
+Steps =64000:   Solution errors = 0.175755  ,  CPU time =  0.216963 s 
+Steps =128000:   Solution errors = 0.0871935  ,  CPU time =  0.317296 s   ,  Convergence rates = 1.01128
+Steps =256000:   Solution errors = 0.0155886  ,  CPU time =  0.550422 s   ,  Convergence rates = 2.48373
+Steps =512000:   Solution errors = 0.00210943  ,  CPU time =  0.985647 s   ,  Convergence rates = 2.88557
+
+The solution errors,convergence rates,CPU time for Bdfs which of 4 order of accuracy:
+Steps =64000:   Solution errors = 0.792718  ,  CPU time =  0.209537 s 
+Steps =128000:   Solution errors = 0.0541977  ,  CPU time =  0.334036 s   ,  Convergence rates = 3.8705
+Steps =256000:   Solution errors = 0.00378922  ,  CPU time =  0.566692 s   ,  Convergence rates = 3.83826
+Steps =512000:   Solution errors = 0.00038745  ,  CPU time =  0.983216 s   ,  Convergence rates = 3.28982
+
+The solution errors,convergence rates,CPU time for Adams_Bashforth which of 1 order of accuracy:
+Steps =64000:   Solution errors = 1.78254  ,  CPU time =  0.011043 s 
+Steps =128000:   Solution errors = 1.73665  ,  CPU time =  0.022327 s   ,  Convergence rates = 0.0376241
+Steps =256000:   Solution errors = 1.75755  ,  CPU time =  0.044607 s   ,  Convergence rates = -0.0172576
+Steps =512000:   Solution errors = 1.72769  ,  CPU time =  0.089924 s   ,  Convergence rates = 0.0247231
+
+The solution errors,convergence rates,CPU time for Adams_Bashforth which of 2 order of accuracy:
+Steps =64000:   Solution errors = 2.03473  ,  CPU time =  0.019492 s 
+Steps =128000:   Solution errors = 1.94346  ,  CPU time =  0.038516 s   ,  Convergence rates = 0.0662096
+Steps =256000:   Solution errors = 1.45894  ,  CPU time =  0.078409 s   ,  Convergence rates = 0.413703
+Steps =512000:   Solution errors = 0.793913  ,  CPU time =  0.15778 s   ,  Convergence rates = 0.877871
+
+The solution errors,convergence rates,CPU time for Adams_Bashforth which of 3 order of accuracy:
+Steps =64000:   Solution errors = 0.839339  ,  CPU time =  0.02625 s 
+Steps =128000:   Solution errors = 0.180694  ,  CPU time =  0.052706 s   ,  Convergence rates = 2.21571
+Steps =256000:   Solution errors = 0.026498  ,  CPU time =  0.10867 s   ,  Convergence rates = 2.76959
+Steps =512000:   Solution errors = 0.00374068  ,  CPU time =  0.211001 s   ,  Convergence rates = 2.82451
+
+The solution errors,convergence rates,CPU time for Adams_Bashforth which of 4 order of accuracy:
+Steps =64000:   Solution errors = 0.641962  ,  CPU time =  0.033527 s 
+Steps =128000:   Solution errors = 0.0901746  ,  CPU time =  0.067923 s   ,  Convergence rates = 2.83169
+Steps =256000:   Solution errors = 0.00605772  ,  CPU time =  0.138407 s   ,  Convergence rates = 3.89587
+Steps =512000:   Solution errors = 0.000228592  ,  CPU time =  0.274206 s   ,  Convergence rates = 4.72793
+
+The solution errors,convergence rates,CPU time for Adams_Moulton which of 2 order of accuracy:
+Steps =16000:   Solution errors = 1.73685  ,  CPU time =  0.029908 s 
+Steps =32000:   Solution errors = 1.71467  ,  CPU time =  0.059996 s   ,  Convergence rates = 0.0185433
+Steps =64000:   Solution errors = 1.43971  ,  CPU time =  0.120293 s   ,  Convergence rates = 0.252156
+Steps =128000:   Solution errors = 0.844445  ,  CPU time =  0.244427 s   ,  Convergence rates = 0.769701
+
+The solution errors,convergence rates,CPU time for Adams_Moulton which of 3 order of accuracy:
+Steps =16000:   Solution errors = 1.88047  ,  CPU time =  0.032941 s 
+Steps =32000:   Solution errors = 0.191532  ,  CPU time =  0.068494 s   ,  Convergence rates = 3.29544
+Steps =64000:   Solution errors = 0.112532  ,  CPU time =  0.136654 s   ,  Convergence rates = 0.767252
+Steps =128000:   Solution errors = 0.0207273  ,  CPU time =  0.268554 s   ,  Convergence rates = 2.44073
+
+The solution errors,convergence rates,CPU time for Adams_Moulton which of 4 order of accuracy:
+Steps =16000:   Solution errors = 9.96581  ,  CPU time =  0.035347 s 
+Steps =32000:   Solution errors = 1.25259  ,  CPU time =  0.07161 s   ,  Convergence rates = 2.99208
+Steps =64000:   Solution errors = 0.112747  ,  CPU time =  0.141377 s   ,  Convergence rates = 3.47375
+Steps =128000:   Solution errors = 0.00760679  ,  CPU time =  0.279311 s   ,  Convergence rates = 3.88966
+
+The solution errors,convergence rates,CPU time for Adams_Moulton which of 5 order of accuracy:
+Steps =16000:   Solution errors = 1.22271  ,  CPU time =  0.035886 s 
+Steps =32000:   Solution errors = 0.29387  ,  CPU time =  0.070703 s   ,  Convergence rates = 2.05683
+Steps =64000:   Solution errors = 0.00819737  ,  CPU time =  0.142081 s   ,  Convergence rates = 5.16387
+Steps =128000:   Solution errors = 2.9133e-05  ,  CPU time =  0.282466 s   ,  Convergence rates = 8.13636
+
+The solution errors,convergence rates,CPU time for Runge_Kutta which of 4 order of accuracy:
+Steps =10000:   Solution errors = 1.82512  ,  CPU time =  0.011666 s 
+Steps =20000:   Solution errors = 0.464908  ,  CPU time =  0.023599 s   ,  Convergence rates = 1.97297
+Steps =40000:   Solution errors = 0.0230255  ,  CPU time =  0.046777 s   ,  Convergence rates = 4.33564
+Steps =80000:   Solution errors = 0.00149189  ,  CPU time =  0.093495 s   ,  Convergence rates = 3.94802
+

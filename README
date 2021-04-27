@@ -1,0 +1,8 @@
+使用说明：
+
+tex文件夹下存在Project1.tex文件和Makefile文件，在tex文件夹下执行make story,生成相应的Project1.pdf文件。
+
+bin文件夹下存在main_1.cpp,main_2.cpp,Test_1.cpp,Test_2.cpp所需要的输入文件Test1_input.txt，main1_input.txt，main2_input.txt，Test2_input.txt以及Makefile文件，在
+bin文件夹下执行make run，可以生成可执行文件main_1,main_2,Test_1,Test_2并立即执行Test_1,Test_2。从而得到，在生成步数递增的情况下，不同精度不同方法的误差、CPU时间和收
+敛速度的计算结果，结果显示在Test1.out,Test2.out文件中。
+
