@@ -6,7 +6,6 @@ class Adams_Bashforth:public Explicit_LMM
 {
  private:
   static const std::vector<std::vector<Real>> Beta;
-  static const int _s[4];
  public:
  Adams_Bashforth():Explicit_LMM(){};
   virtual  void Solve_IVPs(const int steps,

@@ -20,59 +20,62 @@ Real Get_1_norm(std::vector<Real> x,std::vector<Real> y)
 
 int main()
 {
+  std::ofstream fout("Test2.out");
+  std::ifstream fin("Test2_input.txt");
+
   std::string s;
   int p;
   long long  steps;
   int turns;
 
-  std::ifstream fin("Test2_input.txt");
-  fin>>s>>p>>steps>>turns;
-  
   std::vector<Real> u0;
   u0={0.87978,0,0,0,-0.3797,0};
   Real T=19.14045706162071;
   Three_Body_Sys F(6,u0);
-  TimeIntegrator * TI=TimeIntegratorFactory::instance().CreateTimeIntegrator(s);
   
-  std::ofstream fout("Test2.out");
-
-  clock_t startTime,endTime;
-  fout<<"The solution errors,convergence rates,CPU time for "<<s<<" which of "<<p<<" order of accuracy:"<<std::endl;		 
-
-  std::vector<std::vector<Real>>  temp;
-
-  long long  st[turns+1];
-  Real time[turns+1];
-  Real error[turns+1];
-  
-  for (int j=0;j<=turns;++j)
+  while (fin>>s>>p>>steps>>turns)
     {
-      st[j]=steps;
-      startTime=clock();
-      std::vector<std::vector<Real>> A;
-      TI->Solve_IVPs(steps,T,F,A,p);
-      endTime=clock();
-      time[j]=(double)(endTime - startTime) / CLOCKS_PER_SEC;
+      TimeIntegrator * TI=TimeIntegratorFactory::instance().CreateTimeIntegrator(s);
 
-      if (j!=0)
+      clock_t startTime,endTime;
+      fout<<"The solution errors,convergence rates,CPU time for "<<s<<" which of "<<p<<" order of accuracy:"<<std::endl;		 
+
+      std::vector<std::vector<Real>>  temp;
+
+      long long  st[turns+1];
+      Real time[turns+1];
+      Real error[turns+1];
+  
+      for (int j=0;j<=turns;++j)
 	{
-	  Real h=2*T/steps;
-	  for (int i=0;i<=steps;i+=2)
+	  st[j]=steps;
+	  startTime=clock();
+	  std::vector<std::vector<Real>> A;
+	  TI->Solve_IVPs(steps,T,F,A,p);
+	  endTime=clock();
+	  time[j]=(double)(endTime - startTime) / CLOCKS_PER_SEC;
+
+	  if (j!=0)
 	    {
-	      int t=i/2;
-	      error[j-1]+=h*(Get_1_norm(temp[t],A[i]));
+	      Real h=2*T/steps;
+	      for (int i=0;i<=steps;i+=2)
+		{
+		  int t=i/2;
+		  error[j-1]+=h*(Get_1_norm(temp[t],A[i]));
+		}
 	    }
+	  temp=A;
+	  steps=steps*2;
 	}
-      temp=A;
-      steps=steps*2;
-    }
-  for (int j=0;j<=turns-1;++j)
-    {
-      fout<<"Steps = "<<st[j]<<": CPU time = "<<time[j];
-      fout<<" , Solution errors = "<<error[j];
-      if (j!=0)
+      for (int j=0;j<=turns-1;++j)
 	{
-	  fout<<" , Convergence rates = "<<log(error[j-1]/error[j])/log(2.0);
+	  fout<<"Steps = "<<st[j]<<": CPU time = "<<time[j];
+	  fout<<" , Solution errors = "<<error[j];
+	  if (j!=0)
+	    {
+	      fout<<" , Convergence rates = "<<log(error[j-1]/error[j])/log(2.0);
+	    }
+	  fout<<std::endl;
 	}
       fout<<std::endl;
     }

@@ -6,7 +6,6 @@ class Adams_Moulton:public Implicit_LMM
 {
  private:
   static const std::vector<std::vector<Real>> Beta;
-  static const int _s[4];
   
  public:
  Adams_Moulton():Implicit_LMM(){};

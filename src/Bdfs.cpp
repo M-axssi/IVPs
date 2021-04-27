@@ -10,27 +10,22 @@ const std::vector<std::vector<Real>> Bdfs::Alpha=
 
 const std::vector<Real> Bdfs::Beta={1.0,2.0/3,6.0/11,12.0/25};
 
-const int Bdfs::_s[4]={1,2,3,4};
-
 void Bdfs::Solve_IVPs(const int steps,                                  
 		      const Real T,const IVPs & F,std::vector<std::vector<Real>>& S, int p)
 {
   int n=F.Get_n();
   S.push_back(F.Get_u0());
-  int s=_s[p-1];
+  int s=p;
   if (steps==0) return;
   const Real k=T/steps;
   for (int i=1;i<=s-1;++i)
     {
-      std::vector<Real> temp(n,0);
-      std::vector<Real> initial(S[i-1]);
-      //initial+=k*F.Get_diff(S[i-1]);
-      for (int j=0;j<=i-1;++j)
-        {
-      	  temp+=Alpha[i-1][j]*S[j];
-      	}
-      Nonlinear_Solve(initial,temp,F,-k*Beta[i-1]);
-      S.push_back(initial);
+      std::vector<Real> y_1,y_2,y_3,y_4;
+      y_1=F.Get_diff(S[i-1]);
+      y_2=F.Get_diff(S[i-1]+(k/2)*y_1);
+      y_3=F.Get_diff(S[i-1]+(k/2)*y_2);
+      y_4=F.Get_diff(S[i-1]+k*y_3);
+      S.push_back(S[i-1]+(k/6)*(y_1+2*y_2+2*y_3+y_4));
     }
    for (int i=s;i<=steps;++i)
     {

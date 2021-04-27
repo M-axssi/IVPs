@@ -7,7 +7,6 @@ class Bdfs:public Implicit_LMM
  private:
   static const std::vector<std::vector<Real>> Alpha;
   static const std::vector<Real> Beta;
-  static const int _s[4];
   
  public:
  Bdfs():Implicit_LMM(){};
